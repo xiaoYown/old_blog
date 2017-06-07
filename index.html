@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>xiaoYown_blog</title>
+  <link rel="stylesheet" type="text/css" href="./css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="./css/index.css"/>
+  <script type="text/javascript" data-main="./js/index_view" src="./js/require.min.js"></script>
+</head>
+<body>
+  <header class="header container-padding">
+    <div id="pageTip" class="page-tip"></div>
+    <img title="your father" src="./images/header.png" class="header-icon"/>
+    <button class="header-collapse-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav">
+      <a href="#=home">home</a>
+      <a href="#=note">note</a>
+      <a href="#=demo">demo</a>
+      <a href="#=pratice">pratice</a>
+    </nav>
+  </header>
+  <section id="view-port" class="section container-padding">
+    
+  </section>
+  <footer class="footer container-padding">
+    <div class="establish-time">状态：未完成 2016-6-16(来位UI帮忙呗)</div>
+    
+    <div class="contact-me inline-wrap">
+      <button onclick="javascript: window.history.go(-1)">&lt;</button>
+      <button onclick="javascript: window.history.go(1)">&gt;</button>
+      <button id="contactMe">contact me</button>
+    </div>
+
+    <div id="contactBox" class="contact-me-box">
+      phone&nbsp;:&nbsp;13128991487 <br>
+      QQ&nbsp;:&nbsp; 511687372
+    </div>
+  </footer>
+
+  <!-- html片段 -->
+  <!-- home -->
+  <textarea id="home" class="hide-box" value='
+    <h3 title="your father" class="master-name">qin_zhen_ya</h3>
+    <p class="master-dsc">一名"挖粪涂墙"的青年</p>
+    <ul class="inline-wrap">
+      <li class="new-group">
+        <h4 class="new-group-head">demo</h4>
+        <a href="./tpl/demo_css.html" class="new-link">latest update&nbsp;:&nbsp;css_移动端优化</a>
+        <time class="new-update-time" datetime="2016-06-22" pubdate="pubdate"></time>
+      </li>
+      <li class="new-group">
+        <h4 class="new-group-head">note</h4>
+        <a href="./tpl/note_regular.html" class="new-link">latest update&nbsp;:&nbsp;正则量词以及起始/结束</a>
+        <time class="new-update-time" datetime="2016-06-17" pubdate="pubdate"></time>
+      </li>
+      <li class="new-group">
+        <h4 class="new-group-head">pratice</h4>
+        <a href="" class="new-link">latest update&nbsp;:&nbsp;暂无内容</a>
+        <time class="new-update-time" datetime="2016-06-22" pubdate="pubdate"></time>
+      </li>
+    </ul>
+  '></textarea>
+
+  <!-- note -->
+  <textarea id="note" class="hide-box"  value='
+    <ul class="class-container">
+      <li class="class-group-header">
+        <div class="lf">class</div>
+        <div class="rt">update time</div>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/note_github.html" class="class-group-link">github</a>
+        <time datetime="2016-6-17" class="new-update-time"></time>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/note_css.html" class="class-group-link">css</a>
+        <time datetime="2016-6-**" class="new-update-time"></time>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/note_js.html" class="class-group-link">js</a>
+        <time datetime="2016-6-18" class="new-update-time"></time>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/note_regular.html" class="class-group-link">regular</a>
+        <time datetime="2016-6-19" class="new-update-time"></time>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/note_gulp.html" class="class-group-link">gulp</a>
+        <time datetime="2016-6-22" class="new-update-time"></time>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/note_algorithm.html" class="class-group-link">JS算法与数据结构</a>
+        <time datetime="2016-6-28" class="new-update-time"></time>
+      </li>
+    </ul>
+  '></textarea>
+
+  <!-- demo -->
+  <textarea id="demo" class="hide-box"  value='
+    <ul class="class-container">
+      <li class="class-group-header">
+        <div class="lf">class</div>
+        <div class="rt">update time</div>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/demo_regular.html" class="class-group-link">regular</a>
+        <time datetime="2016-6-20" class="new-update-time"></time>
+      </li>
+      <li class="class-group">
+        <a href="./tpl/demo_css.html" class="class-group-link">css</a>
+        <time datetime="2016-6-23" class="new-update-time"></time>
+      </li>
+       <li class="class-group">
+        <a href="./tpl/demo_vue/index.html" class="class-group-link">vue</a>
+        <time datetime="2017-3-01" class="new-update-time"></time>
+      </li>
+    </ul>
+  '></textarea>
+
+  <!-- pratice -->
+  <textarea id="pratice" class="hide-box"  value='
+    
+  '></textarea>
+</body>
+</html>

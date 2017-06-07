@@ -1,0 +1,53 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>匹配子项</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+  <title>github命令行</title>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+
+    <h3 class="note-title-3">匹配子项</h3>
+    <p class="note-content-area">
+      匹配子项 ： 小括号 () (另一个意思，分组操作) <br>
+      var str = "2016-6-18"; <br>
+      var reg = /(\d+)(-)/g; <br>
+      str = str.replace( reg , function(string , string01 , string02){ <br>
+        &nbsp;&nbsp;// string----正则整体 , string01----第一个子项 , string02----第二个子项 <br>
+        &nbsp;&nbsp;return string01 + "."; <br>
+      }); <br>
+      console.log(str);   //2016.6.18 <br>
+
+      str = "abc" <br>
+      reg = /(a)(b)(c)/; <br>
+      console.log(str.match(reg)); //[abc , a , b , c] --- 子项会被自动的push到匹配成功的数组后(仅适用于非全局匹配时)
+    </p>
+
+  </div>
+
+</body>
+</html>
+<script type="text/javascript">
+  var str = "2016-6-18";
+  var reg = /(\d+)(-)/g;
+  str = str.replace( reg , function(string , string01 , string02){
+    // string----正则整体 , string01----第一个子项 , string02----第二个子项
+    return string01 + ".";
+  });
+  console.log(str);   //2016.6.18
+
+  str = "abc"
+  reg = /(a)(b)(c)/;
+  console.log(str.match(reg)); //[abc , b , c] --- 子项会被自动的push到匹配成功的数组后(仅适用于非全局匹配时)
+</script>

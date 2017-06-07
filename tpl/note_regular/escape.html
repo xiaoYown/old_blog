@@ -1,0 +1,141 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>转义字符</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+
+    <h3 class="note-title-3">常用转义字符</h3>
+    <p class="note-content-area">
+    . : 任意字符 <br>
+    \.: 真正的. <br>
+    \s: 空格 <br>
+    \S: 非空格 <br>
+    \d: 数字 <br>
+    \D: 非数字 <br>
+    \w: 字符   (包括  字母 ， 数字  ， 下划线 _) <br>
+    \W: 非字符 <br>
+    \b: 独立的部分 ( 起始 , 结束 , 空格 ) ----example 1<br>
+    \B: 非独立的部分 <br>
+    \1: 重复第1个子项 ---- example 2<br>
+    \2: 重复第2个子项 <br>
+    <br>
+    </p>
+    <h3 class="note-title-3">example 1 ---- 获取class的方法</h3>
+    <p class="note-content-area">
+    function getByClass( parent , classe ){ <br>
+      &nbsp;&nbsp;var arr = []; <br>
+      &nbsp;&nbsp;var eles = parent.getElementsByTagName('*'); <br>
+      &nbsp;&nbsp;var len = eles.length; <br>
+      &nbsp;&nbsp;//当正则需要传参的时候，一定要用全称的写法 <br>
+      &nbsp;&nbsp;var reg = new RegExp( '\\b' + classe + '\\b'); <br>
+      &nbsp;&nbsp;for(var i = 0 ; i < len ; i++){ <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;if( reg.test( eles[i].className ) ) { <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr.push( eles[i] ); <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;} <br>
+      &nbsp;&nbsp;} <br>
+
+      &nbsp;&nbsp;return arr; <br>
+    } <br>
+
+    var box01s = getByClass( document , "box01" ); <br>
+    var len = box01s.length; <br>
+    for(var i = 0 ; i < len ; i++) { <br>
+      &nbsp;&nbsp;console.log(box01s[i]) <br>
+      &nbsp;&nbsp;box01s[i].style.backgroundColor = "#db214c"; <br>
+    } <br>  
+      <ul>
+        <li class="box01">class="box01"</li>
+        <li class="box01box02">class="box01box02"</li>
+        <li class="box01 box02">class="box01 box02"</li>
+      </ul>
+    </p>
+    
+    <h3 class="note-title-3">example 2 ---- 重复的子项</h3>
+    <p class="note-content-area">
+    var str = "aadadhhjmjjjjmjdgggghhmmmm"; <br>
+    var arr = str.split(""); <br>
+    str = arr.sort().join(""); <br>
+    var value = []; <br>
+    var index = 0; <br>
+    var reg = /(\w)\1+/g; <br>
+    str.replace( reg , function($0){ <br>
+      &nbsp;&nbsp;if ( index < $0.length ) { <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;index = $0.length; <br>
+      &nbsp;&nbsp;} <br>
+    }); <br>
+    str.replace( reg , function($0,$1){ <br>
+      &nbsp;&nbsp;if ( index === $0.length ) { <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;value.push($1); <br>
+      &nbsp;&nbsp;} <br>
+    }); <br>
+    var len = value.length; <br>
+    console.log( "出现次数最多的为" + index + "次"); <br>
+    for( var i = 0 ; i < len ; i ++) { <br>
+      &nbsp;&nbsp;console.log(value[i]); <br>
+    } <br>
+    </p>
+    <br>
+    
+  </div>
+</body>
+</html>
+<script type="text/javascript">
+  //获取class的方法
+  function getByClass( parent , classe ){
+    var arr = [];
+    var eles = parent.getElementsByTagName('*');
+    var len = eles.length;
+    //当正则需要传参的时候，一定要用全称的写法
+    var reg = new RegExp( '\\b' + classe + '\\b');
+    for(var i = 0 ; i < len ; i++){
+      if( reg.test( eles[i].className ) ) {
+        arr.push( eles[i] );
+      }
+    }
+
+    return arr;
+  }
+
+  var box01s = getByClass( document , "box01" );
+  var len = box01s.length;
+  for(var i = 0 ; i < len ; i++) {
+    console.log(box01s[i])
+    box01s[i].style.backgroundColor = "#db214c";
+  }
+  //重复的子项
+
+  var str = "aadadhhjmjjjjmjdgggghhmmmm";
+  var arr = str.split("");
+  str = arr.sort().join("");
+  var value = [];
+  var index = 0;
+  var reg = /(\w)\1+/g;
+  str.replace( reg , function($0){
+    if ( index < $0.length ) {
+      index = $0.length;
+    }
+  });
+  str.replace( reg , function($0,$1){
+    if ( index === $0.length ) {
+      value.push($1);
+    }
+  });
+  var len = value.length;
+  console.log( "出现次数最多的为" + index + "次");
+  for( var i = 0 ; i < len ; i ++) {
+    console.log(value[i]);
+  }
+</script>

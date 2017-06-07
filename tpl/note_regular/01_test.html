@@ -1,0 +1,38 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>test</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+  <div class="container container-padding">
+
+    <h3 class="note-title-3">test</h3>
+    <p class="note-content-area">
+    正则去匹配字符串，成功返回true，否则返回false <br>
+    var str = "abcdef"; <br>
+    var reg = /b/; <br>
+    console.log(reg.test(str)); //true <br> <br>
+
+    var str = "8979897s9"; <br>
+    var reg = /\D/; <br>
+    if( reg.test(str) ){ <br>
+      &nbsp;&nbsp;console.log("不全是数字"); // <br>
+    } else { <br>
+      &nbsp;&nbsp;console.log("全是数字"); <br>
+    }
+    </p>
+
+  </div>
+
+</body>
+</html>

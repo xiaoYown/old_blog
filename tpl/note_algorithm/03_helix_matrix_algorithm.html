@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>helix_matrix_algorithm</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+  <style type="text/css">
+    #box{
+      font-size: 0;
+      margin-top: 10px;
+      border-bottom: 1px solid #fff;
+      border-right: 1px solid #fff;
+      background-color: #000;
+    }
+    #box>li{
+      font-size: 16px;
+      display: inline-block;
+      border-left: 1px solid #fff;
+      border-top: 1px solid #fff;
+      background-size: cover;
+      transition: all 1s;
+    }
+    @keyframes flash{
+      0%{ opacity: 0; }
+      50%{ opacity: 1; }
+      100%{ opacity: 0; }
+    }
+    @-webkit-keyframes flash{
+      0%{ opacity: 0; }
+      50%{ opacity: 1; }
+      100%{ opacity: 0; }
+    }
+    #box>li.active{
+      animation: 1.0s linear infinite flash; 
+      -webkit-animation: 1.0s linear infinite flash; 
+    }
+    .click{
+      display: block;
+      background-color: none;
+      border: 1px solid #ccc;
+      padding: 0.5rem 4.0rem;
+      margin: 0.5rem auto;
+    }
+    .item_num{
+      display: block;
+      border: 1px solid #ccc;
+      width: 40%;
+      height: 2.0rem;
+      margin: 0.5rem auto;
+    }
+  </style>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+    <h2 class="note-title-2">螺旋矩阵</h2>
+    <h3 class="note-title-3">螺旋矩阵实现图片螺旋浏览</h3>
+    <p class="note-content-area">
+
+    </p>
+    <ul id="box">
+    </ul>
+    <input class="item_num" placeholder="input the cols of list" type="number" name="num" id="getN"/>
+    <button class="click" id="btnCreate">create</button>
+    <button class="click" id="btnStart">start</button>
+    <button class="click" id="btnStop">stop</button>
+  </div>
+</body>
+</html>
+<script type="text/javascript">
+  window.onload = function(){
+    var create = document.getElementById("btnCreate");
+    create.onclick = function(){
+      var cols = document.getElementById("getN");
+      var n = parseInt(cols.value);
+
+      var helix = new Helix({
+        parent: document.getElementById("box"),
+        cols: n,    //列
+        time: 1000,
+        cut: 5 //间隔 
+      });
+      helix.init();
+    }
+  }
+  function Helix(obj){
+    this.parent = obj.parent;
+    this.cols = obj.cols;
+    this.time = obj.time;
+    this.cut = obj.cut;
+  }
+  Helix.prototype = (function(win,doc){
+
+    return {
+      init: function(){
+        this.create();
+      },
+      create: function(){
+        var self = this;
+        var allLi = [] , 
+            liIndex = [];   
+        var n = self.cols * self.cols,
+            frag = doc.createDocumentFragment();
+        function ncss(ele,key){
+          return parseInt(getComputedStyle(ele)[key]);
+        }
+        var gradpa = self.parent.parentNode;
+        function setNum(){
+          self.parent.innerHTML = "";
+          var width = (ncss(gradpa,"width") - ncss(gradpa,"padding-left") - ncss(gradpa,"padding-right"))/self.cols;
+          self.parent.style.width = width*self.cols + 1 + "px";
+          var col = 0,
+              row = 0,
+              min = 0,
+              max = self.cols - 1;
+          for( var i = 0 ; i < n ; i++ ){
+            var li = doc.createElement("li");
+            li.style.width = width + "px";
+            li.style.height = width + "px";
+            allLi.push(li);
+            frag.appendChild(li);
+          }
+          for( var i = 0 ; i < n ; i++){
+            var nowLi = allLi[row*self.cols + col];
+            liIndex.push(nowLi);
+            if( row == min && col < max ) {
+              col++;
+            }else if( col == max && row < max ) { //折点1
+              row++;
+            }else if( row == max && col > min ) { //折点2
+              col--;
+            }else if( col == min && row > min ) { //折点3
+              row--;
+            }
+            if( row - 1 == min && col == min ) { //折点4,走完一圈,范围缩小
+              min++;
+              max--;
+            }
+          }
+          self.parent.appendChild(frag);
+          for( var i = 0 ; i < n ; i ++ ) {
+            if( i%self.cut == 0 ) liIndex[i].style.backgroundImage = "url(./images/algorithm_0" + Math.floor(Math.random() * 7 + 1) + ".png)";
+          }
+        }
+        setNum();
+        self.imgMove(liIndex);
+        win.onresize = function(){
+          setNum.call(self);
+        }
+      },
+      imgMove: function(liIndex){
+        var self = this;
+        var len = liIndex.length;
+        var btn_start = document.getElementById("btnStart"),
+            btn_stop = document.getElementById("btnStop");
+        var timer;
+        btnStart.onclick = function(){
+          timer = setInterval(move,self.time);
+        }
+        btnStop.onclick = function(){
+          clearInterval(timer);
+          timer = null;
+        }
+
+        function move(){
+          for( var i = (len-1) ; i >= 0 ; i-- ){
+            var activeLi = liIndex[i];
+            if( i != 0 ) {
+              activeLi.style.backgroundImage = liIndex[i-1].style.backgroundImage;
+            }
+            if( !!activeLi.style.backgroundImage ){
+              activeLi.className = "active";
+            } else {
+              activeLi.className = "";
+            }
+          }
+          if( !!liIndex[self.cut].style.backgroundImage ) {
+            liIndex[0].style.backgroundImage = "url(./images/algorithm_0" + Math.floor(Math.random() * 7 + 1) + ".png)";
+          } else {
+            liIndex[0].style.backgroundImage = "";
+          }
+        }
+      }
+    }
+  })(window,document);
+</script>

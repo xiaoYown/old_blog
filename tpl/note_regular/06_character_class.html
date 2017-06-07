@@ -1,0 +1,51 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>字符类</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+
+    <h3 class="note-title-3">字符类</h3>
+    <p class="note-content-area">
+      字符类 : 一组相似的元素 [&nbsp;] <br>
+      排除 : ^ , 如果 ^ 写在 [&nbsp;] 里面则代表排除的意思 <br>
+      var str = "abc"; <br>
+      var reg = /a[bde]c/; <br>
+      console.log(reg.test(str)); //true<br>
+ <br>
+      reg = /a[a-z]c/; <br>
+      console.log(reg.test(str)); //true<br>
+ <br>
+      str = "&lt;h3&gt;zf高于一切&lt;/h3&gt;88"; <br>
+      reg = /<[^>]+>/g; <br>
+      console.log(str.replace( reg , "" )); //zf高于一切88
+    </p>
+
+  </div>
+
+</body>
+</html>
+<script type="text/javascript">
+  var str = "abc";
+  var reg = /a[bde]c/; 
+  console.log(reg.test(str));
+
+  reg = /a[a-z]c/;
+  console.log(reg.test(str));
+
+  str = "<h3>zf高于一切</h3>88";
+  reg = /<[^>]+>/g;
+  console.log(str.replace( reg , "" ));
+</script>

@@ -1,0 +1,269 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>routing_algorithm</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+  <style type="text/css">
+    .box01{
+      font-size: 0;
+      margin-top: 10px;
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+    .box01>li{
+      font-size: 15px;
+      display: inline-block;
+      border-left: 1px solid #000;
+      border-top: 1px solid #000;
+    }
+    .sty01{
+      background-color: #db214c;
+    }
+    .sty02{
+      background-color: #60b440;
+    }
+    .sty03{
+      background-color: #2d78f4;
+    }
+    .btn{
+      display: block;
+      margin: 1rem auto;
+      color: #fff;
+      padding: 0.4rem 6rem;
+      background-color: #60b440;
+    }
+  </style>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+    <h2 class="note-title-2">寻路算法</h2>
+    <h3 class="note-title-3">1.A*估价函数</h3>
+    <p class="note-content-area">
+      f(n) = g(n) + h(n); <br>
+      -f(n): n节点的估价函数; <br>
+      -g(n): 初始节点到n节点的实际代价; <br>
+      -h(n): n节点到目标点的实际代价. <br>
+    </p>
+    <h3 class="note-title-3">2.A*算法程序实现</h3>
+    <p class="note-content-area">
+      open队列 <br>
+      -排序估价函数 <br>
+      close队列 <br>
+      -排除干扰节点 <br>
+      查询相邻节点 <br>
+      封装估价函数f() g() h() <br>
+      设置父节点指针 <br>
+    </p>
+    <ul class="box01">
+    </ul>
+    <button class="btn" id="routing">寻路</button>
+
+  </div>
+
+</body>
+</html>
+<script type="text/javascript">
+  window.onload = function(){
+    
+    var table = new Aalgorithm({
+      child: ".li01",
+      parent: ".box01"
+    });
+    table.init();
+  };
+  function Aalgorithm(obj){
+    this.child = obj.child;
+    this.parent = obj.parent;
+  }
+  Aalgorithm.prototype = (function(win,doc){
+
+    return {
+
+      init: function(){
+        this.create();
+      },
+      create: function(){
+        var self = this;
+        function css(ele,key,isNum){
+          var value = getComputedStyle(ele)[key];
+          return (!!isNum ? parseInt(value) : value);
+        }
+        var parent = doc.querySelectorAll(this.parent);
+        if( (/NodeList/i).test(parent.toString()) ) {
+          parent = parent[0];
+        }
+        var gradpa = parent.parentNode;
+        var map = [
+          0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+          0,1,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,2,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+          0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+        ];
+        var len = map.length;
+        var cols = Math.sqrt(len) , size;
+        function setNum(){ //设置参数
+          var self = this;
+          self.openArr = [] , self.closeArr = [];
+          parent.innerHTML = "";
+          size = Math.floor((css(gradpa,"width",1) - css(gradpa,"padding-left",1) - css(gradpa,"padding-right",1))/cols);
+          self.size = size;
+          parent.style.width = size*cols + 1 + "px";
+          var frag = doc.createDocumentFragment();
+          for( var i = 0 ; i < len ; i++) {
+            var li = doc.createElement("li");
+            var classN;
+            if ( map[i] == 1 ) {
+              classN = "sty01";
+              self.openArr.push(li);
+            } else if ( map[i] == 2 ) {
+              classN = "sty02";
+            } else if ( map[i] == 3 ) {
+              classN = "sty03";
+              self.closeArr.push(li);
+            } else {
+              classN = "";
+            }
+            li.style.width = size + "px";
+            li.style.height  = size + "px";
+            li.className = classN;
+            frag.appendChild(li); 
+          }
+          parent.appendChild(frag);
+          self.allLi = parent.children;
+          self.routing();
+        }
+        setNum.call(self);
+        win.onresize = function(){
+          setNum.call(self);
+        };
+      },
+      routing: function(){
+        var self = this;
+        var btn = doc.querySelectorAll("#routing")[0],
+            begin = doc.querySelectorAll(".sty01")[0],
+            end   = doc.querySelectorAll(".sty02")[0];
+
+        self.state = 1;
+        btn.onclick = function(){
+          if( !!self.state ) {
+            self.state = 0;
+            openFn(); 
+          } 
+        };
+        function openFn(){
+          var nowLi = self.openArr.shift();
+          if( nowLi === end ) {
+            showLine();
+            var len02 = self.openArr.length;
+            for ( var i = 0 ; i < len02 ; i++ ) {
+              self.openArr[i].style.backgroundColor = "#ccc";
+            } 
+            return false;
+          }
+          closeFn(nowLi);
+          findLi(nowLi);
+          self.openArr.sort(function( li1 , li2 ){
+            return li1.num-li2.num;
+          });
+          openFn();   //open队列递归
+        }
+        function closeFn(li){     //记录最近点元素
+          self.closeArr.push(li);
+        }
+        function findLi(nowLi){   //获取beigin节点周边节点
+          var result = [] , 
+              len = self.allLi.length;
+          for( var i = 0 ; i < len ; i++) {
+            if( filter(self.allLi[i]) ) {
+              result.push(self.allLi[i]); 
+            }
+          }
+          function filter(li){  //过滤closeArr中的节点
+            var len = self.closeArr.length;
+            for( var i = 0 ; i < len ; i++ ) {
+              if( self.closeArr[i] == li ) {
+                return false;
+              } 
+            }
+            var len1 = self.openArr.length;
+            for( var i = 0 ; i < len1 ; i++ ) { //递归时过滤openArr已经存储的节点
+              if( self.openArr[i] == li ) {
+                return false;
+              }
+            }
+            return true;
+          }
+          var len = result.length;
+          for( var i = 0 ; i < len ; i++) {
+            if( Math.abs(nowLi.offsetLeft - result[i].offsetLeft) <= self.size &&
+                Math.abs(nowLi.offsetTop - result[i].offsetTop) <= self.size  ) {
+              result[i].num = f( result[i] );   //估价
+              result[i].parent = nowLi;         //记录上一节点
+              self.openArr.push( result[i] );
+            }
+          }
+        }
+        function showLine(){ //路线确定后开始走线 
+          var result = [];
+          var lastLi = self.closeArr[self.closeArr.length-1];
+          var iNow = 0;
+          findParent(lastLi);
+          function findParent(li){
+            result.unshift(li);
+            if( li.parent == begin ) {
+              return false;
+            }
+            findParent(li.parent);  //递归查询路线
+          }
+          var timer = setInterval(function(){
+            result[iNow].style.backgroundColor = "#db214c";
+            iNow++;
+            if( iNow == result.length ) {
+              clearInterval(timer);
+              timer = null;
+            }
+          },200);
+        }
+        function f(li){
+          return g(li) + h(li);
+        }
+        function g(li){
+          var a = begin.offsetLeft - li.offsetLeft,
+              b = begin.offsetTop  - li.offsetTop;
+          return Math.sqrt( a*a + b*b);
+        }
+        function h(li){
+          var a = end.offsetLeft - li.offsetLeft,
+              b = end.offsetTop  - li.offsetTop;
+          return Math.sqrt( a*a + b*b);
+        }
+      }
+    }
+  })(window,document);
+</script>

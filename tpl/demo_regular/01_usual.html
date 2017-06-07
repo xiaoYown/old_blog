@@ -1,0 +1,123 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>常用正则</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/demo_currency.css"/>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+  <div class="container container-padding">
+  <h2 class="demo-title-2">常用正则</h2>
+    <h3 class="demo-title-3">匹配中文</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="chineseTest">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/[\u4e00-\u9fa5]+/"></p>
+    </div>
+
+    <h3 class="demo-title-3">首尾空格</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="space">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/^\s+|\s+$/g"></p>
+    </div>
+
+    <h3 class="demo-title-3">email</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="email">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/^\w+@[0-9a-z]+(\.[a-z]+){1,3}$/"></p>
+    </div>
+
+    <h3 class="demo-title-3">网址</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="url">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/[a-zA-Z]+:\/\/[^/s]*/"></p>
+    </div>
+
+    <h3 class="demo-title-3">QQ</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="QQ">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/^[1-9]\d{4-9}$/"></p>
+    </div>
+
+    <h3 class="demo-title-3">邮政编码</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="zipCode">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/^[1-9]\d{5}$/"></p>
+    </div>
+
+    <h3 class="demo-title-3">身份证</h3>
+    <div class="demo-content-area inline-wrap">
+      <button class="demo-btn-01" data-btn="IDCard">test</button>
+      <input class="demo-input-01" type="text" name="chinese"/>
+      <p class="demo-dsc-01" data-regular="/^[1-9]\d{5}((\d{2}[01]\d[0-3]\d{4})|(1[89]\d{2}[01]\d[0-3]\d{4}[\dx]))$/"></p>
+    </div>
+
+  </div>
+
+</body>
+</html>
+<script type="text/javascript">
+  window.onload = function(){
+    usualReg.init();
+  };
+  var usualReg = (function(win,doc){
+    var reg = {
+      "chineseTest" : /[\u4e00-\u9fa5]+/,
+      "space" : /^\s+|\s+$/,
+      "email" : /^\w+@[0-9a-z]+(\.[a-z]+){1,3}$/,
+      "url"   : /[a-zA-Z]+:\/\/[^/s]*/,
+      "QQ"    : /^[1-9]\d{4,9}$/,
+      "zipCode" : /^[1-9]\d{5}$/,
+      "IDCard"  : /^[1-9]\d{5}((\d{2}[01]\d[0-3]\d{4})|(1[89]\d{2}[01]\d[0-3]\d{4}[\dx]))$/
+    };
+    return {
+      init: function(){
+        this.test();
+      },
+      test: function(){
+        var btns = doc.querySelectorAll(".demo-btn-01");
+        var len = btns.length;
+        for(var i = 0 ; i < len ; i++){
+          btns[i].onclick = function(){
+            takeTest.call(this); 
+          }
+        }
+        function takeTest(){
+          var key   = this.getAttribute("data-btn"),
+              value = getSb(this , "input").value,
+              dsc   = getSb(this , "p");
+          var result = reg[key].test(value);
+          var final = result ? { "innerHTML": "TRUE" , "style": "color: #60b044;" } : { "innerHTML": "FALSE" , "style": "color: #db214c;" };
+          for( key in final ) {
+            dsc[key] = final[key];
+          }
+        }
+        function getSb(self , node){
+          return self.parentNode.querySelectorAll(node)[0];
+        }
+      }
+    }
+  })(window,document);
+
+</script>
+
+
+
+
+
+
+
+

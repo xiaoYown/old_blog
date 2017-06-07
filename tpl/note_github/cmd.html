@@ -1,0 +1,203 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>xiaoYown_blog</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+  <title>github命令行</title>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+    <h2 class="note-title-2">一、git的三个区</h2>
+    <h3 class="note-title-3">1.工作区</h3>
+    <h3 class="note-title-3">2.暂存区</h3>
+    <p class="note-content-area">作为过渡层 ，避免出现误操作 ，保护工作区 和 版本区 ， 分支处理 </p>
+    <h3 class="note-title-3">3.版本区（库）</h3>
+    <p class="note-content-area">主分支 ： master</p>
+
+    <h2 class="note-title-2">二、简单命令行</h2>
+    <h3 class="note-title-3">Tips</h3>
+    <p class="note-content-area">分支提示： <br>
+       "+" ----标示有添加 <br>
+       "-" ----标示有删除 <br>
+       "~" ----标示有修改 <br>
+       "!" ----标示有冲突 <br>
+    </p>
+
+    <h3 class="note-title-3">1.clone文件</h3>
+    <p class="note-content-area">
+     clone项目到文件夹  github clone URL
+    </p>
+    
+    <h3 class="note-title-3">2.设置管理者信息</h3>
+    <p class="note-content-area">github config --global <br>
+       (1)user.name "***"  <br>
+        ---- 设置 master name <br>     
+       (2)user.email "***" <br>
+        ---- 设置 master email <br>
+       (3)user.name <br>
+        ---- 查看master name <br>     
+       (4)user.email <br>
+        ---- 查看master email <br>     
+       (5)github config --list  <br>
+        ---- 查看master 信息清单
+
+    <h3 class="note-title-3">3.查看分区状态</h3>
+    <p class="note-content-area">git status</p>
+
+    <h3 class="note-title-3">4.将工作区文件添加到缓存区</h3>
+    <p class="note-content-area">git add file.name</p>
+    <p class="note-content-area">git add . <br> 
+       所有改变全部添加
+    </p>
+
+    <h3 class="note-title-3">5.将暂存区文件添加到版本区</h3>
+    <p class="note-content-area">(1)git commit    <br>
+       ---- 更新版本 ， 会弹出txt添加注释 ， 最好写英文 <br>
+       -m "注释" <br>
+       ---- 注释的常用方式 <br>
+       -a -m "注释" <br>
+       ---- 跳过暂存区直接存储到版本区 
+    </p>
+
+    <h3 class="note-title-3">6.查看提交历史</h3>
+    <p class="note-content-area">git log</p>
+
+    <h3 class="note-title-3">7.查看三个区的文件内容差异对比</h3>
+    <p class="note-content-area">(1)git diff      <br>
+        工作区  ----- 暂存区 <br>
+        (2)git diff  --cached(staged) <br>
+        暂存区  ----- 版本库 <br>
+        (3)git diff  --master <br> 
+        工作区  ----- 版本库
+    </p>
+
+    <h3 class="note-title-3">8.撤销操作</h3>
+    <p class="note-content-area">git reset HEAD file.name ---- 将缓存区的文件撤销</p>
+    <p class="note-content-area">git checkout file.name ---- 将工作区的文件撤销  先尝试从缓存区还原，再尝试从版本库还原</p>
+    <p class="note-content-area">git commit -m "备注" --amend <br>
+       ----假如进行一次 commit 提交 ，漏提交其他文件 ，可将上次提交撤销 ，将暂存区的文件与上次提交合并到一起进行提交</p>
+
+    <h3 class="note-title-3">9.删除操作</h3>
+    <p class="note-content-area">git rm file.name <br>
+    ---- 工作区中文件如果已经删掉，暂存区中还存在，可通过该命令行删除暂存区中的该文件 <br>
+    ---- 如果工作区中的文件没有删除 ， 该命令执行error
+    </p>
+    <p class="note-content-area">git rm -f file.name <br>
+    ---- 同时删掉工作区与缓存区的文件  
+    </p>
+    <p class="note-content-area">git rm -cached file.name <br>
+    ---- 只会把缓存区的文件删掉
+    </p>
+
+    <h3 class="note-title-3">10.恢复</h3>
+    <p class="note-content-area">git checkout commit_id file.name <br>
+       ----指定文件恢复，恢复工作区中误删的文件 <br>
+       git checkout master <br>
+       ----回到master分支
+    </p>
+    <p class="note-content-area">git reset --hard commit_id <br>
+       ----指定版本恢复，将工作区整个项目还原到该版本 <br>
+       >>HEAD^ ----回到上一版本(HEAD其实就是一个指针) <br>
+       >>HEAD~&lt;num&gt; ----指定恢复到前 num 个版本
+    </p>
+    <p class="note-content-area">git reflog <br>
+       ----显示版本操作记录
+    </p>
+
+    <h3 class="note-title-3">11.同步到远程仓库</h3>
+    <p class="note-content-area">git remote <br> 
+       ---- 查看仓库名<br>
+       -v <br>
+       ----查看仓库地址 <br> 
+       git push origin(仓库名) master(分支名) ----同步到远程仓 <br>
+       ----如果发生冲突则error无法提交 , 解决冲突后再提交(coding前先进行代码的更新)
+    </p>
+
+    <p class="note-content-area">多人协作解决冲突 <br>
+       git fetch <br>
+       ----从远程仓拉取代码但是并不合并(首选) <br>
+       git diff master origin/master <br>
+       ----拉取代码后打印区别 <br>
+       git merge origin/master <br>
+       ----手动合并代码 <br>
+       ----冲突解决，解决后再commit代码就可以了 <br> 
+       git pull <br>
+       ----拉取代码并且自动合并
+    </p>
+
+    <h3 class="note-title-3">12.开源项目合作</h3>
+    <p class="note-content-area">fork <br>
+       ----新建一个分支 ， 并且将项目clone一份到本地
+    </p>
+    <p class="note-content-area">pull request <br>
+      ----向开源项目管理者发送 自己分支修改部分请求
+    </p>
+
+    <h3 class="note-title-3">13.Git 分支</h3>
+    <p class="note-content-area">git branch <br>
+       (1)branch.name <br>
+       ---- 新建一个名称为branch.name的分支 <br>
+       (2)checkout branch.name <br>
+       ---- 切换到 branch.name 的这个分支上 <br>
+       (3)git checkout branch.name <br>
+       ---- 新建一个名称为branch.name的分支 ， 并且直接切换到该分支上 <br>
+       (4)merge branch.name <br>
+       ---- 在master主分支上进行该命令行操作 ， 可将branch.name分支直接合并到主分支上 <br>
+       (5)--merged <br>
+       ---- 查看已合并的分支 <br>
+       (6)--no-merged <br>
+       ---- 查看未合并的分支 <br>
+       (7)-d branch.name <br>
+       ---- 直接删除已经与主分支merged的分支
+       (8)-D branch.name <br>
+       ---- 强制删除未与主分支merged的分支 <br>
+       (9)merge产生冲突 <br>
+       在master branch解决冲突后 commit 则可将master 和产生冲突的branch 进行合并 ， --merged 可看到两个分支已经合并 ， 但是产生冲突的branch并没有改变
+
+    <h3 class="note-title-3">13.github 上的分支</h3>
+    <p class="note-content-area">将分支git push 到github上 <br>
+       github上直接创建
+    </p>
+
+    <h3 class="note-title-3">14.github 上的标签(其实就是版本)</h3>
+    <p class="note-content-area">(1)git tag v1.0 <br>
+       git push origin v1.0 <br>
+       ---- 给远程仓库更新v1.0版本 <br>
+       (2)github上直接创建
+    </p>
+
+    <h3 class="note-title-3">15.创建组织</h3>
+    <p class="note-content-area">git 上创建</p>
+
+    <h3 class="note-title-3">16.创建bolg</h3>
+    <p class="note-content-area">github上创建</p>
+    <p class="note-content-area">https://pages.github.com/</p>
+    <p class="note-content-area">注意格式的正确性</p>
+
+    <h3 class="note-title-3">17.深入学习</h3>
+    <p class="note-content-area">
+      http://git.oschina.net/progit/ <br>
+      http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000 <br>
+      (1)mkdir file <br>
+      ----新建文件夹 <br>
+      (2)notepad hello.txt <br>
+      ----通过notepad打开hello.txt ， 若找不到则会新建一个hello.txt <br>
+      (3)git config --global alias.name 指令名 <br>
+      ----  给指令一个name的别名，方便调用 <br>
+      example : git config --global alias.check checkout <br>
+      ----以后可以通过check代替checkout
+    </p>  
+  </div>
+
+</body>
+</html>

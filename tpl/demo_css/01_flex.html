@@ -1,0 +1,379 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>flex</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/demo_currency.css"/>
+  <script type="text/javascript" src="../../js/currency.js"></script>
+  <style type="text/css">
+    .flex-wrap{
+      display: flex;
+      border: 1px solid #ccc;
+    }
+    .center-w-h{
+      justify-content: center;
+      align-items: center;
+    }
+    .flex-in{
+      box-flex: 1;
+      width: 50px;
+      height: 50px;
+      border: 1px solid #000;
+      text-align: center;
+      line-height: 50px;
+      font-size: 16px;
+      word-break: break; /*保证在英文和数字状态下,flex子项的宽度不受影响*/
+    }
+    .direction-r-l{
+      flex-direction: row-reverse;
+    }
+    .direction-t-b{
+      flex-direction: column;
+    }
+    .direction-b-t{
+      flex-direction: column-reverse;
+    }
+    .wrap-lines-t{
+      flex-wrap: wrap;
+    }
+    .wrap-lines-b{
+      flex-wrap: wrap-reverse;
+    }
+    .wp-50{
+      width: 50%;
+    }
+    .h-200{
+      height: 200px;
+    }
+    .h-150{
+      height: 150px;
+    }
+    .justify-start{
+      justify-content: flex-start;
+    }
+    .justify-end{
+      justify-content: flex-end;
+    }
+    .justify-center{
+      justify-content: center;
+    }
+    .justify-between{
+      justify-content: space-between;
+    }
+    .justify-around{
+      justify-content: space-around;
+    }
+    .align-start{
+      align-items: flex-start;
+    }
+    .align-end{
+      align-items: flex-end;
+    }
+    .align-center{
+      align-items: center;
+    }
+    .align-baseline{
+      align-items: baseline;
+    }
+    .align-stretch{
+      align-items: stretch;
+    }
+    .alignc-start{
+      align-content: flex-start;
+    }
+    .alignc-end{
+      align-content: flex-end;
+    }
+    .alignc-center{
+      align-content: center;
+    }
+    .alignc-between{
+      align-content: space-between;
+    }
+    .alignc-around{
+      align-content: space-around;
+    }
+    .alignc-stretch{
+      align-content: stretch;
+    }
+  </style>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+  <div class="container container-padding">
+    <h2 class="demo-title-2">flex容器属性</h2>
+
+    <h3 class="demo-title-3">1.flex结构图</h3>
+    <div class="demo-content-area">
+      <img src="./images/flex_01.png" class="img-click" data-clickImg/>
+    </div>
+
+    <h3 class="demo-title-3">2.弹性居中(可实现垂直水平居中)</h3>
+    <div class="demo-content-area">
+      <div class="flex-wrap center-w-h h-200">
+        <div class="flex-in"></div>
+      </div>
+    </div>
+
+    <h3 class="demo-title-3">3.flex-direction----主轴方向设置</h3>
+    <div class="demo-content-area">
+      <p>row----默认值,横向,从左至右</p>
+      <div class="flex-wrap">
+        <div class="flex-in">1</div>
+        <div class="flex-in">2</div>
+        <div class="flex-in">3</div>
+        <div class="flex-in">4</div>
+      </div>
+      <p> row-reverse----从右至左 </p>
+      <div class="flex-wrap direction-r-l">
+        <div class="flex-in">1</div>
+        <div class="flex-in">2</div>
+        <div class="flex-in">3</div>
+        <div class="flex-in">4</div>
+      </div>
+
+      <p>column----纵向排布,从上至下 <br> column-reverse----从下至上 </p>
+      <div class="flex-wrap">
+        <div class="flex-wrap direction-t-b wp-50">
+          <div class="flex-in">1</div>
+          <div class="flex-in">2</div>
+          <div class="flex-in">3</div>
+        </div>
+
+        <div class="flex-wrap direction-b-t wp-50">
+          <div class="flex-in">1</div>
+          <div class="flex-in">2</div>
+          <div class="flex-in">3</div>
+        </div>
+        
+      </div>
+    </div>
+
+    <h3 class="demo-title-3">4.flex-wrap----是否多行显示</h3>
+    <div class="demo-content-area">
+      <p>flex-wrap: wrap;----由上到下多行显示</p>
+      <div class="flex-wrap wrap-lines-t">
+        <div class="flex-in" style="width: 20%">1</div>
+        <div class="flex-in" style="width: 20%">2</div>
+        <div class="flex-in" style="width: 20%">3</div>
+        <div class="flex-in" style="width: 20%">4</div>
+        <div class="flex-in" style="width: 20%">5</div>
+        <div class="flex-in" style="width: 20%">6</div>
+      </div>
+      <p>flex-wrap: wrap-reverse;----由下到上多行显示</p>
+      <div class="flex-wrap wrap-lines-b">
+        <div class="flex-in" style="width: 20%">1</div>
+        <div class="flex-in" style="width: 20%">2</div>
+        <div class="flex-in" style="width: 20%">3</div>
+        <div class="flex-in" style="width: 20%">4</div>
+        <div class="flex-in" style="width: 20%">5</div>
+        <div class="flex-in" style="width: 20%">6</div>
+      </div>
+    </div>
+    
+    <h3 class="demo-title-3">5.flex-flow----缩写</h3>
+    <p class="demo-content-area padding-left-20">
+      flex-flow: [flex-direction] [flex-wrap]; <br>
+      默认值: flex-flow: row nowrap;
+    </p>
+
+    <h3 class="demo-title-3">6.justify-content----主轴对齐方式</h3>
+    <p>flex-start</p>
+    <div class="flex-wrap justify-start">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>flex-end</p>
+    <div class="flex-wrap justify-end">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>flex-center</p>
+    <div class="flex-wrap justify-center">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>flex-between</p>
+    <div class="flex-wrap justify-between">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>flex-around</p>
+    <div class="flex-wrap justify-around">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+
+    <h3 class="demo-title-3">7.align-items----侧轴对齐方式</h3>
+    <p>flex-start</p>
+    <div class="flex-wrap align-start direction-t-b">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>flex-end</p>
+    <div class="flex-wrap align-end direction-t-b">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>center</p>
+    <div class="flex-wrap align-center direction-t-b">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>baseline</p>
+    <div class="flex-wrap baseline direction-t-b">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+    </div>
+    <p>stretch</p>
+    <div class="flex-wrap align-stretch h-200">
+      <div class="flex-in" style="height: auto">1</div>
+      <div class="flex-in" style="height: auto">2</div>
+      <div class="flex-in" style="height: auto">3</div>
+      <div class="flex-in" style="height: auto">4</div>
+    </div>
+
+    <h3 class="demo-title-3">8.align-content----伸缩行在伸缩容器内的对齐方式(只有在多行情况下才生效)</h3>
+    <p>flex-start</p>
+    <div class="flex-wrap wrap-lines-t alignc-start h-150">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+      <div class="flex-in">5</div>
+      <div class="flex-in">6</div>
+      <div class="flex-in">7</div>
+      <div class="flex-in">8</div>
+    </div>
+    <p>flex-end</p>
+    <div class="flex-wrap wrap-lines-t alignc-end h-150">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+      <div class="flex-in">5</div>
+      <div class="flex-in">6</div>
+      <div class="flex-in">7</div>
+      <div class="flex-in">8</div>
+    </div>
+    <p>center</p>
+    <div class="flex-wrap wrap-lines-t alignc-center h-150">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+      <div class="flex-in">5</div>
+      <div class="flex-in">6</div>
+      <div class="flex-in">7</div>
+      <div class="flex-in">8</div>
+    </div>
+    <p>between</p>
+    <div class="flex-wrap wrap-lines-t alignc-between h-150">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+      <div class="flex-in">5</div>
+      <div class="flex-in">6</div>
+      <div class="flex-in">7</div>
+      <div class="flex-in">8</div>
+    </div>
+    <p>around</p>
+    <div class="flex-wrap wrap-lines-t alignc-around h-150">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+      <div class="flex-in">5</div>
+      <div class="flex-in">6</div>
+      <div class="flex-in">7</div>
+      <div class="flex-in">8</div>
+    </div>
+    <p>stretch</p>
+    <div class="flex-wrap wrap-lines-t alignc-stretch h-150">
+      <div class="flex-in">1</div>
+      <div class="flex-in">2</div>
+      <div class="flex-in">3</div>
+      <div class="flex-in">4</div>
+      <div class="flex-in">5</div>
+      <div class="flex-in">6</div>
+      <div class="flex-in">7</div>
+      <div class="flex-in">8</div>
+    </div>
+    <h2 class="demo-title-2">flex项目属性</h2>
+    <h3 class="demo-title-3">1.order----项目排序</h3>
+    <p>排序按照order值从小到大排序</p>
+    <div class="flex-wrap">
+      <div class="flex-in" style="order: 3">1</div>
+      <div class="flex-in" style="order: 1">2</div>
+      <div class="flex-in" style="order: 2">3</div>
+      <div class="flex-in" style="order: 0">4</div>
+    </div>
+    <h3 class="demo-title-3">2.flex----伸缩</h3>
+    <p>flex-grow----扩展比</p>
+    <div class="flex-wrap">
+      <div class="flex-in" style="flex-grow: 1;flex-shrink: 0;flex-basis: 0;">1</div>
+      <div class="flex-in" style="flex-grow: 2;flex-shrink: 0;flex-basis: 0;">2</div>
+      <div class="flex-in" style="flex-grow: 1;flex-shrink: 0;flex-basis: 0;">3</div>
+      <div class="flex-in" style="flex-grow: 2;flex-shrink: 0;flex-basis: 0;">4</div>
+    </div>
+    <p>flex-shrink----收缩比</p>
+    <div class="flex-wrap">
+      <div class="flex-in" style="flex-shrink: 0;flex-basis: auto;">1</div>
+      <div class="flex-in" style="flex-shrink: 2;flex-basis: auto;">2</div>
+      <div class="flex-in" style="flex-shrink: 0;flex-basis: auto;">3</div>
+      <div class="flex-in" style="flex-shrink: 2;flex-basis: auto;">4</div>
+      <div class="flex-in" style="flex-shrink: 0;flex-basis: auto;">5</div>
+      <div class="flex-in" style="flex-shrink: 2;flex-basis: auto;">6</div>
+      <div class="flex-in" style="flex-shrink: 0;flex-basis: auto;">7</div>
+      <div class="flex-in" style="flex-shrink: 2;flex-basis: auto;">8</div>
+    </div>
+    <p>flex-basis ----基准值比</p>
+    <div class="flex-wrap">
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 0;">1</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 1;">2</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 0;">3</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 1;">4</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 0;">5</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 1;">6</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 0;">7</div>
+      <div class="flex-in" style="flex-shrink: 1;flex-basis: 1;">8</div>
+    </div>
+  </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

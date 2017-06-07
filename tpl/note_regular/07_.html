@@ -1,0 +1,48 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>正则量词以及起始/结束</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+
+    <h3 class="note-title-3">正则量词以及起始/结束</h3>
+    <p class="note-content-area">
+    + : {1,} <br>
+    ? : {0,1} <br>
+    * : {0,} <br>
+    ^ : 正则的最开始位置, 就代表起始的意思 <br>
+    $ : 正则的最后位置 , 就代表结束的意思 <br>
+    </p>
+
+  </div>
+
+</body>
+</html>
+<script type="text/javascript">
+  //验证手机号码
+  var phone = "15789908767";
+  var reg = /^1[3|5|8]\d{9}$/;
+
+  console.log(reg.test(phone)); //true
+
+  //去掉前后空格
+  var str = " hello ";
+
+  String.prototype.trim = function(){
+    var reg = /^\s|\s$/g;
+    return this.replace( reg , "" );
+  };
+  console.log(str.trim() + "s")
+</script>

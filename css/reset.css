@@ -1,0 +1,147 @@
+@charset "utf-8";
+html{
+  width: 100%;
+}
+body{
+  position: relative;
+  width: 100%;
+  color: #444;
+  font-family: Arial,"Microsoft Yahei","Helvetica Neue",Helvetica,sans-serif;
+  background-color: #fff;
+}
+html,body,header,section,footer,h1,h2,h3,h4,h5,li,a,span,div,p,img,input,select,button,textarea,ul,ol,dl,dt,dd{
+  margin: 0;
+  padding: 0;
+  opacity: 1.0;
+  border: none;
+  border-radius: 0;
+  list-style: none;
+  text-align: left;
+  text-decoration: none;
+  -webkit-appearance: none;
+  z-index: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+button{
+  text-align: center;
+  background-color: #fff;
+  font-family: Arial,"Microsoft Yahei","Helvetica Neue",Helvetica,sans-serif; 
+}
+button:hover{
+  cursor: pointer;
+}
+table{
+  border-collapse:  collapse;
+  border-spacing: 0;
+}
+h2{
+  font-weight: normal;
+  font-size: 3.6rem;
+}
+h3{
+  font-weight: normal;
+  font-size: 3rem;
+}
+h4{
+  font-weight: normal;
+  font-size: 1.4rem;
+}
+h5{
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+a{
+  color: #444;
+}
+a:hover{
+  cursor: pointer;
+}
+
+.lf   {float: left;   }
+.rt   {float: right;  }
+.clear{clear: both;   }
+.container:before{content: " "; display: table;}
+.container:after {content: " ";display: table;clear: both;}
+/******************通用******************/
+.class-group{
+  position: relative;
+  line-height: 36px;
+}
+.class-group-header{
+  font-size: 1.8rem;
+  line-height: 50px;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+.class-group-link{
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+.new-update-time{
+  position: absolute;
+  right: 20px;
+  top: 1.0rem;
+  background-color: #fff;
+}
+.wImg{
+  display: block;
+  width: 100%;
+}
+.img-click{
+  display: block;
+  height: 150px;
+  width: auto;
+  margin: 0 auto;
+}
+.img-clicked{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.txt-center{
+  text-align: center;
+}
+.container-padding{
+  position: relative;
+}
+.btn-back , .btn-forward{
+  position: fixed;
+  top: 50%;
+  color: #fff;
+  font-size: 1.6rem;
+  padding: 1.6rem 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 100000;
+}
+.btn-back{
+  left: 2px;
+}
+.btn-forward{
+  right: 2px;
+}
+.padding-left-20{
+  padding-left: 20px;
+}
+@media (max-width: 440px){
+  html{
+    font-size: 12px;
+  }  
+  .container-padding{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media (min-width: 441px){
+  html{
+    font-size: 14px;
+  }
+  .container-padding{
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

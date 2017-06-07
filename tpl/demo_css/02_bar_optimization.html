@@ -1,0 +1,95 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>移动端_优化</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/demo_currency.css"/>
+  <style type="text/css">
+  .container{
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .box{
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+  }
+  .nowrap{
+    width: 200%;
+    white-space: nowrap;
+    font-size: 0;
+  }
+  .li{
+    display: inline-block;
+    width: 8%;
+    height: 60px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+    background-color: #000;
+    border-left: 6px solid #fff;
+  }
+  </style>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+  <div class="container container-padding">
+    <h2 class="demo-title-2">栏目滑动优化以及回弹</h2>
+    <h3 class="demo-title-3">关键样式</h3>
+    <div class="demo-content">
+      white-space: nowrap; <br>
+      overflow-x: auto;    <br>
+      -webkit-overflow-scrolling: touch;
+    </div>
+
+    <h3 class="demo-title-3"></h3>
+    <div class="demo-content-area">
+      <div class="container">
+        <div class="box">
+          <ul class="nowrap">
+            <li class="li">1</li>
+            <li class="li">2</li>
+            <li class="li">3</li>
+            <li class="li">4</li>
+            <li class="li">5</li>
+            <li class="li">6</li>
+            <li class="li">7</li>
+            <li class="li">8</li>
+            <li class="li">9</li>
+            <li class="li">10</li>
+            <li class="li">11</li>
+            <li class="li">12</li>
+            <li class="li">13</li>
+            <li class="li">14</li>
+            <li class="li">15</li>
+            <li class="li">16</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

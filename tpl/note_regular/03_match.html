@@ -1,0 +1,35 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="no"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="renderer" content="webkit"/>
+  <title>match</title>
+  <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/note_currency.css"/>
+</head>
+<body>
+  <a class="btn-back" href="javascript: window.history.go(-1)">&lt;</a>
+  <a class="btn-forward" href="javascript: window.history.go(1)">&gt;</a>
+
+  <div class="container container-padding">
+
+    <h3 class="note-title-3">match</h3>
+    <p class="note-content-area">
+    正则去匹配字符串 ， 如果成功 ：则返回匹配成功的数组 ， 不成功 ：则返回null <br>
+    语法 ： string.match(reg) <br>
+    正则默认 ： 匹配成功就会结束 ， 不会继续匹配 <br>
+    如果想全部查找 ， 就要加标示 g <br>
+    +匹配类型至少一次 <br>
+    var str = "dfd234dsfds34sadsd9"; <br>
+    var reg = /\d+/g; <br>
+    console.log(str.match(reg)); // ["234", "34", "9"]<br>
+    </p>
+
+  </div>
+
+</body>
+</html>
